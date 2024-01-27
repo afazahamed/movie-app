@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchAsyncMovies } from "../../features/movies/movieSlice";
 import { useDispatch } from "react-redux";
+import SearchStyle from "./Search.module.scss";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -11,17 +12,31 @@ const Search = () => {
     dispatch(fetchAsyncMovies(search));
   };
 
+  useEffect(() => {
+    dispatch(fetchAsyncMovies());
+  }, [dispatch]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handlesearch();
+    }
+  };
+
   return (
     <>
-      <input
-        className="form-control form-control-lg mb-4"
-        type="text"
-        placeholder="Search movies"
-        aria-label=".form-control-lg example"
-        onChange={(e) => setSearch(e.target.value)}
-      ></input>
-      <div className="btn btn-primary" onClick={handlesearch}>
-        Search
+      <div className={SearchStyle.wrapper}>
+        <div className={SearchStyle.wrapper_inner}>
+          <input
+            className={SearchStyle.input}
+            type="text"
+            placeholder="Search movies"
+            onKeyDown={handleKeyDown}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <div className={SearchStyle.search_btn} onClick={handlesearch}>
+            Search
+          </div>
+        </div>
       </div>
     </>
   );

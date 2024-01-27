@@ -1,52 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import {
-  getAllMovies,
-  getAllShows,
-  getPending,
-} from "../../features/movies/movieSlice";
-import MovieCard from "../MovieCard/MovieCard";
-import Search from "../Search/Search";
+import MovieListingStyle from "./MovieListing.module.scss";
+import TopRated from "../TopRated/TopRated";
+import Movies from "../Movies/Movies";
 
 const MovieListing = () => {
-  const movies = useSelector(getAllMovies);
-  const shows = useSelector(getAllShows);
-  const pending = useSelector(getPending);
-
-  let renderMovies,
-    renderShows = "";
-
-  renderMovies =
-    movies.Response === "True" ? (
-      movies.Search.map((movie, index) => (
-        <MovieCard key={index} data={movie} />
-      ))
-    ) : (
-      <div>{movies.Error}</div>
-    );
-
-  renderShows =
-    shows.Response === "True" ? (
-      shows.Search.map((movie, index) => <MovieCard key={index} data={movie} />)
-    ) : (
-      <div>{shows.Error}</div>
-    );
-
   return (
     <>
-      <h2>Movies</h2>
-      {/* {JSON.stringify(pending)} */}
+      <h2 className={MovieListingStyle.movie_title}>Top Rated</h2>
+      <TopRated />
 
-      <Search />
-      <div className="container">
-        <div className="row">
-          {pending == true ? <h1>Loading...</h1> : renderMovies}
-        </div>
-      </div>
-      <h2>Shows</h2>
-      <div className="container">
-        <div className="row">{renderShows}</div>
-      </div>
+      <h2 className={MovieListingStyle.movie_title}>Picked for you</h2>
+      <Movies />
     </>
   );
 };

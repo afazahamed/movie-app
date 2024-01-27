@@ -1,0 +1,17 @@
+.loading {
+  color: white;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.horizontal_scroll {
+  display: flex;
+  gap: 15px;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow-x: scroll;
+  padding: 30px;
+  margin-bottom: 50px;
+}

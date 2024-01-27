@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import MovieListing from "../MovieListing/MovieListing";
+import Sidebar from "../Sidebar/Sidebar";
+import HomeStyle from "./Home.module.scss";
 
 import { useDispatch } from "react-redux";
 import {
@@ -16,8 +18,11 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <MovieListing />
+    <div className={HomeStyle.content}>
+      <Sidebar />
+      <div className={HomeStyle.right}>
+        <MovieListing />
+      </div>
     </div>
   );
 };
